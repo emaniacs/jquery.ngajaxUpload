@@ -1,0 +1,5 @@
+jquery.ngajaxUpload
+================
+
+Upload a file with XMLHttpRequest (ajax) method.
+Ok this is not really ajax, just iframe.
