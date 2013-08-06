@@ -6,7 +6,7 @@
             $(function(){
                 $('.ngajax').ngajaxUpload({
                     after: function(d) {
-                        $('#res').html(d);
+                        $('#res').text(d);
                         $('#loading').html('Success.');
                     },
                     before: function(e) {
@@ -14,7 +14,7 @@
                         loading.html('Loading...');
                         if (! $(this).find('[name=ajax-file]').val()) {
                             loading.html('Please select a file.');
-                            ret = false
+                            ret = false;    // break submitting form.
                         }
                         return ret;
                     }
