@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="jquery.ngajaxUpload.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $('.ngajax').ngajaxUpload({
+                    after: function(d) {
+                        $('#res').html(d);
+                        $('#loading').html('Success.');
+                    },
+                    before: function(e) {
+                        var loading = $('#loading'), ret = true;
+                        loading.html('Loading...');
+                        if (! $(this).find('[name=ajax-file]').val()) {
+                            loading.html('Please select a file.');
+                            ret = false
+                        }
+                        return ret;
+                    }
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <form method="post" action="upload-handler.php" class="ngajax" enctype="multipart/form-data">
+            <input type="file" name="ajax-file"/><br/>
+
+            <input type="submit" value="Upload"/>
+        </form>
+        
+        <div id="loading">Click upload.</div>
+        <pre id="res"></pre>
+    </body>
+</html>
