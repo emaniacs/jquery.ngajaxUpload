@@ -38,6 +38,7 @@
             var iframe = document.createElement('iframe');
             iframe.id  = 'ngajax-upload-iframe';
             iframe.setAttribute('style', 'display:none !important');
+            iframe.setAttribute('name', 'ngajax-upload-iframe');
             document.body.appendChild(iframe);
 
             obj.target = 'ngajax-upload-iframe';
