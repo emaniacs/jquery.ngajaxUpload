@@ -25,7 +25,7 @@
     $.fn.ngajaxUpload = function (opts) {
         var options = $.extend(true,
             {
-                after: function(data) {}, // in after scope, "this" is iframe.
+                after: function(data) {}, // in after scope, "this" is the form.
                 before: function(event) {
                     // return true, so form submitted.
                     // in this scope (before), "this" is the form.
@@ -67,7 +67,7 @@
                 var res = $(this).contents().text();
 
                 if (typeof(options['after']) == 'function') {
-                    options['after'].call(this, res);
+                    options['after'].call(obj, res);
                 }
             })
         })
