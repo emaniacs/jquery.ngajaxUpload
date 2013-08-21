@@ -1,4 +1,4 @@
-/*
+/**
  * jquery.ngajaxUpload.js
  * 
  * Copyright 2013 Ardi <noone.nu1@gmail.com>
@@ -30,23 +30,40 @@
                     // return true, so form submitted.
                     // in this scope (before), "this" is the form.
                     return true;
-                }
+                },
+                tagId: 'ngajax-upload-iframe',
+                attrName: 'ngajax-upload-iframe'
             }
             , opts);
+            
+        //internal function
+        function createIframe() {
+            var iframe = $('iframe#'+options['tagId'])
+            if (iframe.length === 0) {
+                iframe = document.createElement('iframe');
+                iframe.id  = options['tagId'];
+                iframe.setAttribute('style', 'display:none !important');
+                
+                // prevent firefox to open a new tab.
+                iframe.setAttribute('name', options['attrName']);
+                
+                document.body.appendChild(iframe);
+                
+                iframe = $(iframe);
+            }
+            
+            return iframe;
+        }
 
         return this.each(function(index, obj) {
-            var iframe = document.createElement('iframe');
-            iframe.id  = 'ngajax-upload-iframe';
-            iframe.setAttribute('style', 'display:none !important');
-            iframe.setAttribute('name', 'ngajax-upload-iframe');
-            document.body.appendChild(iframe);
+            var iframe = createIframe();
 
-            obj.target = 'ngajax-upload-iframe';
-            $(obj).submit(function(event){
+            obj.target = options['tagId'];
+            obj.onsubmit = function(event){
                 return options['before'].call(this, event);
-            })
+            }
             
-            $('#ngajax-upload-iframe').on('load', function(a,b,c){
+            iframe.on('load', function(a,b,c){
                 var res = $(this).contents().text();
 
                 if (typeof(options['after']) == 'function') {
