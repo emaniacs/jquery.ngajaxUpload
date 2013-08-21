@@ -8,6 +8,7 @@
                     after: function(d) {
                         $('#res').text(d);
                         $('#loading').html('Success.');
+                        $(this).hide('slow', function(){$(this).remove()});
                     },
                     before: function(e) {
                         var loading = $('#loading'), ret = true;
