@@ -22,6 +22,7 @@
  */
 
 ;(function($){
+    var ngajaxUploadCount = 0;
     $.fn.ngajaxUpload = function (opts) {
         var options = $.extend(true,
             {
@@ -38,10 +39,10 @@
             
         //internal function
         function createIframe() {
-            var iframe = $('iframe#'+options['tagId'])
+            var iframe = $('iframe#'+options['tagId']+'-' + ngajaxUploadCount);
             if (iframe.length === 0) {
                 iframe = document.createElement('iframe');
-                iframe.id  = options['tagId'];
+                iframe.id  = options['tagId'] + '-' + ngajaxUploadCount++;
                 iframe.setAttribute('style', 'display:none !important');
                 
                 // prevent firefox to open a new tab.
